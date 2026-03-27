@@ -1,36 +1,23 @@
-# Project Brief
+# Project brief
 
 ## Що це за проєкт
 
-- Це monorepo Excalidraw: поєднує веб-застосунок (`excalidraw-app`), бібліотеку для вбудовування (`packages/excalidraw`) і приклади інтеграції (`examples/*`).
-- Ключова бізнес-ідея: надати whiteboard/diagram інструмент з "hand-drawn" UX, який працює як окремий продукт і як embeddable React-компонент.
-- Репозиторій організований через Yarn Workspaces: `excalidraw-app`, `packages/*`, `examples/*`.
+- **Назва монорепозиторію**: `excalidraw-monorepo` (див. кореневий `package.json`, поле `name`).
+- **Призначення**: вихідний код **Excalidraw** — веб-додаток для малювання діаграм і скетчів «від руки» та набір **npm-пакетів** з логікою редактора й UI-компонентом `@excalidraw/excalidraw`.
+- **Доказ у коді**: пакет `@excalidraw/excalidraw` має опис *«Excalidraw as a React component»* (`packages/excalidraw/package.json`).
 
-## Основна мета
+## Основна мета (з коду)
 
-- Розвивати ядро Excalidraw як reusable продуктову платформу:
-  - **App** для кінцевих користувачів (малювання, колаборація, збереження, PWA).
-  - **Library** `@excalidraw/excalidraw` для інтеграції в інші React-застосунки.
-- Забезпечити єдині доменні модулі для геометрії, елементів сцени та загальних утиліт:
-  - `packages/math`
-  - `packages/element`
-  - `packages/common`
-  - `packages/utils`
+- **Зібрати й запустити веб-застосунок** у каталозі `excalidraw-app` (Vite + React; точка входу `excalidraw-app/index.tsx`).
+- **Розділити код на пакети** з чіткими залежностями (`packages/common`, `packages/math`, `packages/element`, `packages/utils`, `packages/excalidraw`) і збирати їх окремо (`build:packages` у кореневому `package.json`).
+- **Надати інтеграційні приклади** у `examples/*` (окремі workspace-пакети в кореневому `package.json`).
 
-## Межі та склад системи
+## Обмеження щодо «мети курсу / ДЗ»
 
-- **Presentation/Application layer**: `excalidraw-app` (Vite app shell, колаборація, локальне збереження, runtime-плагіни).
-- **Domain/editor layer**: `packages/excalidraw` (компоненти редактора, actions, scene/data API).
-- **Supporting domain modules**:
-  - `packages/element` (модель і поведінка елементів сцени),
-  - `packages/math` (геометричні обчислення),
-  - `packages/common` (подієві та інфраструктурні утиліти).
-- **Consumer examples**: `examples/with-nextjs`, `examples/with-script-in-browser`.
+- У репозиторії **немає** кореневого `README.md` з описом навчального завдання; назва папки на диску не використовується як джерело істини в Memory Bank.
 
-## Верифікація з source code
+## Ключові артефакти для орієнтації
 
-- Monorepo/workspaces: `package.json` (root) -> `name: "excalidraw-monorepo"`, `workspaces`.
-- App workspace: `excalidraw-app/package.json`.
-- Library package: `packages/excalidraw/package.json` -> `name: "@excalidraw/excalidraw"`, `description`.
-- Embed позиціонування: `packages/excalidraw/README.md` -> "exported as a React component".
-- Приклади інтеграції: `examples/with-nextjs/package.json`, `examples/with-script-in-browser/package.json`.
+- **Кореневий маніфест**: `package.json` — workspaces, скрипти збірки/тестів, `engines.node`.
+- **Застосунок**: `excalidraw-app/package.json`, `excalidraw-app/App.tsx`, `excalidraw-app/index.tsx`.
+- **Бібліотека UI**: `packages/excalidraw/package.json`, `packages/excalidraw/index.tsx` (експорт компонента).
